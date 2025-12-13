@@ -53,7 +53,7 @@ void* lang_process_worker(void* arg) {
         }
 
         // 4. 保存结果到当前语种任务的结果集
-        std::lock_guard<std::mutex> lock(task->mutex);
+        // std::lock_guard<std::mutex> lock(task->mutex);
         task->result[img_id] = img_stats;
     }
 

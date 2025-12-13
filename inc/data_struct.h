@@ -42,7 +42,7 @@ struct LangTask {
     std::vector<std::string> image_paths;      // 待处理图片路径
     double threshold;                          // 匹配阈值
     std::map<std::string, std::vector<TextStats>> result; // 该语种处理结果
-    std::mutex mutex;                          // 线程安全锁
+    // std::mutex mutex;                          // 线程安全锁
     std::string udisk_mount;                   // U盘挂载点
 };
 

@@ -66,7 +66,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 target_link_libraries(${PROJECT_NAME}
     ${LEPTONICA_LIBRARIES}
     ${TESSERACT_LIBRARIES}
-    ${LIBHARU_LIBRARIES}
+    /usr/lib/x86_64-linux-gnu/libhpdf.so
     ${X11_LIBRARIES}
     Threads::Threads
     m  # 数学库

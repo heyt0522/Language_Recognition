@@ -188,8 +188,7 @@ text_matcher: CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/build.make
-text_matcher: /usr/lib/x86_64-linux-gnu/libX11.so
-text_matcher: /usr/lib/x86_64-linux-gnu/libXext.so
+text_matcher: /usr/lib/x86_64-linux-gnu/libhpdf.so
 text_matcher: /usr/lib/x86_64-linux-gnu/libX11.so
 text_matcher: /usr/lib/x86_64-linux-gnu/libXext.so
 text_matcher: CMakeFiles/text_matcher.dir/link.txt

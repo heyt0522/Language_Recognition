@@ -42,7 +42,7 @@ std::vector<std::string> get_image_paths(const std::string& dir) {
 }
 
 int main(int argc, char* argv[]) {
-    std::cout << "===== 正点原子I.MX6ULL多语言文字识别匹配系统 =====" << std::endl;
+    std::cout << "===== 多语言文字识别匹配系统 =====" << std::endl;
 
     // 1. 解析命令行参数
     CmdArgs args;
