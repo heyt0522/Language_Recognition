@@ -3,6 +3,8 @@
 #include "csv_parser.h"
 #include <iostream>
 #include <cstdlib>
+#include <sys/stat.h>
+#include <unistd.h>
 
 void* lang_process_worker(void* arg) {
     LangTask* task = static_cast<LangTask*>(arg);
@@ -47,7 +49,12 @@ void* lang_process_worker(void* arg) {
 
         // 3. 生成标注图片（保存到U盘）
         std::string img_name = img_path.substr(img_path.find_last_of('/') + 1);
-        std::string annotated_img = task->udisk_mount + "/annotated_" + img_name;
+        // U盘挂载点
+        /*std::string annotated_img = task->udisk_mount + "/annotated_" + img_name; */
+        
+        //本地目录保存
+        std::string annotated_img = task->output_dir + "/annotated_" + img_name;
+        mkdir(task->output_dir.c_str(), 0777);  // 755 权限：所有者可读写执行，其他只读执行
         if (annotate_image(img_path, annotated_img, img_stats) != 0) {
             std::cerr << "图片标注失败：" << img_path << std::endl;
         }

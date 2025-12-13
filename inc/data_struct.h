@@ -44,6 +44,7 @@ struct LangTask {
     std::map<std::string, std::vector<TextStats>> result; // 该语种处理结果
     // std::mutex mutex;                          // 线程安全锁
     std::string udisk_mount;                   // U盘挂载点
+    std::string output_dir = "/home/he_yt/Multilingual_Recognition/code/language_result";    //新增本地存储点
 };
 
 // 命令行参数

@@ -9,6 +9,21 @@
 #include "thread_pool.h"
 #include "pdf_generator.h"
 
+
+std::string csv_path;       // CSV文件路径
+std::string img_dir;        // 图片目录路径
+std::string output_dir = "./recognition_output";  // 本地输出目录（替代U盘）
+double confidence = 0.7;    // 默认置信度阈值
+
+//定义 usage() 帮助函数（解决未声明问题）
+void usage() {
+    std::cerr << "Usage: ./text_matcher -c <csv_path> -i <img_dir> [-t <confidence>] [-u <output_dir>]" << std::endl;
+    std::cerr << "  -c: 文言库CSV文件路径（必填）" << std::endl;
+    std::cerr << "  -i: 待识别图片目录（必填）" << std::endl;
+    std::cerr << "  -t: 识别置信度阈值（可选，默认0.7）" << std::endl;
+    std::cerr << "  -u: 本地输出目录（可选，默认./recognition_output）" << std::endl;
+}
+
 /**
  * 获取指定目录下的所有图片路径
  * @param dir 目录路径
@@ -43,6 +58,7 @@ std::vector<std::string> get_image_paths(const std::string& dir) {
 
 int main(int argc, char* argv[]) {
     std::cout << "===== 多语言文字识别匹配系统 =====" << std::endl;
+    int opt = 0;
 
     // 1. 解析命令行参数
     CmdArgs args;
@@ -50,6 +66,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
+    #if 0
     // 2. 检测并挂载U盘
     char udisk_dev[64];
     if (find_udisk_device(udisk_dev, sizeof(udisk_dev)) != 0) {
@@ -58,6 +75,25 @@ int main(int argc, char* argv[]) {
     std::cout << "检测到U盘设备：" << udisk_dev << std::endl;
 
     if (mount_udisk(udisk_dev, args.udisk_mount.c_str()) != 0) {
+        return -1;
+    }
+    #endif // 0
+    
+    // 2. 检测本地路径
+    std::string output_dir = "/home/he_yt/Multilingual_Recognition/code/language_result";
+    while ((opt = getopt(argc, argv, "c:i:t:u:")) != -1)
+    {
+        switch(opt){
+            case 'c': csv_path = optarg; break;
+            case 'i': img_dir = optarg; break;
+            case 't': confidence = atof(optarg); break;
+            case 'u': output_dir = optarg; break;  // -u 改为指定本地目录
+            default: usage(); return -1; 
+        }
+    }
+    
+    if (csv_path.empty() || img_dir.empty()) {
+        usage();
         return -1;
     }
 
@@ -88,14 +124,24 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
+    #if 0
     // 7. 生成PDF报告（保存到U盘）
     std::string pdf_path = args.udisk_mount + "/recognition_result.pdf";
     if (generate_pdf(pdf_path, global_result) != 0) {
         std::cerr << "PDF报告生成失败" << std::endl;
     }
+    #endif // 0
+
+    //7. 生成PDF报告（保存到本地）
+    std::string pdf_path = "/home/he_yt/Multilingual_Recognition/code/language_result/pdf/language_recognition_report.pdf";
+    if (generate_pdf(pdf_path, global_result) != 0)
+    {
+        std::cerr << "PDF报告生成失败" << std::endl;
+    }
+    
 
     // 8. 卸载U盘
-    umount_udisk(args.udisk_mount.c_str());
+    // umount_udisk(args.udisk_mount.c_str());
 
     std::cout << "===== 处理完成！所有结果已保存至U盘 =====" << std::endl;
     return 0;
