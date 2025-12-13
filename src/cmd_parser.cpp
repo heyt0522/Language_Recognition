@@ -7,7 +7,7 @@ int parse_cmd_args(int argc, char* argv[], CmdArgs& args) {
     // 默认参数初始化
     args.csv_path = "";
     args.image_dir = "";
-    args.udisk_mount = "/mnt/udisk";
+    std::string output_dir = "/home/he_yt/Multilingual_Recognition/code/language_result/pdf/";
     args.threshold = 0.7;
 
     // 短选项定义
@@ -22,7 +22,7 @@ int parse_cmd_args(int argc, char* argv[], CmdArgs& args) {
                 args.image_dir = optarg;
                 break;
             case 'u':
-                args.udisk_mount = optarg;
+                output_dir = optarg;
                 break;
             case 't':
                 args.threshold = atof(optarg);
@@ -42,7 +42,7 @@ int parse_cmd_args(int argc, char* argv[], CmdArgs& args) {
     // 检查必填参数
     if (args.csv_path.empty() || args.image_dir.empty()) {
         std::cerr << "缺少必填参数！" << std::endl;
-        std::cerr << "用法：" << argv[0] << " -c <CSV路径> -i <图片目录> [-u <U盘挂载点>] [-t <匹配阈值>]" << std::endl;
+        std::cerr << "用法：" << argv[0] << " -c <CSV路径> -i <图片目录> [-u <本地输出目录>] [-t <匹配阈值>]" << std::endl;
         return -1;
     }
 
