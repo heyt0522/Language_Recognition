@@ -1,0 +1,7 @@
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/text_matcher.dir
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/edit_cache.dir
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/rebuild_cache.dir
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/list_install_components.dir
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/install.dir
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/install/local.dir
+/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles/install/strip.dir

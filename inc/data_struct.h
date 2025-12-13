@@ -43,14 +43,15 @@ struct LangTask {
     double threshold;                          // 匹配阈值
     std::map<std::string, std::vector<TextStats>> result; // 该语种处理结果
     std::mutex mutex;                          // 线程安全锁
+    std::string udisk_mount;                   // U盘挂载点
 };
 
 // 命令行参数
 struct CmdArgs {
     std::string csv_path;       // CSV文件路径
     std::string image_dir;      // 图片目录
-    std::string udisk_mount;    // U盘挂载点
     double threshold;           // 匹配阈值（默认0.7）
+    std::string udisk_mount;    // U盘挂载点
 };
 
 // 全局结果集
