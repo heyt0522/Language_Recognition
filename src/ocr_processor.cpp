@@ -1,130 +1,235 @@
-#include "ocr_processor.h"
-#include <tesseract/baseapi.h>
-#include <leptonica/allheaders.h>
-#include <CImg.h>
-#include <iostream>
+#include "csv_parser.h"
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
+#include <unistd.h>
+#include <regex>
 #include <algorithm>
+#include <cstdio>
+#include "data_struct.h"
 
-using namespace cimg_library;
+// 解析带嵌套换行的CSV字段（处理双引号包裹的多行内容）
+std::vector<std::string> parse_csv_line(const std::string& line) {
+    std::vector<std::string> fields;
+    std::string current_field;
+    bool in_quote = false;
 
-int ocr_image_by_lang(const std::string& img_path, const std::string& lang, std::vector<OcrResult>& results) {
-    // 初始化Tesseract OCR
-    tesseract::TessBaseAPI api;
-    // 设置Tesseract数据路径（开发板端需确保tessdata存在）
-    if (api.Init("./config/tessdata", lang.c_str())) {
-        std::cerr << "Tesseract初始化失败（语种：" << lang << "）" << std::endl;
-        return -1;
+    for (char c : line) {
+        if (c == '"' && !in_quote) {
+            in_quote = true;
+            continue;
+        } else if (c == '"' && in_quote) {
+            in_quote = false;
+            continue;
+        }
+
+        if (c == ',' && !in_quote) {
+            fields.push_back(current_field);
+            current_field.clear();
+        } else {
+            current_field += c;
+        }
     }
-
-    // 加载图片
-    Pix* pix = pixRead(img_path.c_str());
-    if (!pix) {
-        std::cerr << "无法加载图片：" << img_path << std::endl;
-        api.End();
-        return -1;
-    }
-
-    // 设置识别图片
-    api.SetImage(pix);
-    // 获取识别结果（按单词级别）
-    tesseract::ResultIterator* ri = api.GetIterator();
-    tesseract::PageIteratorLevel level = tesseract::RIL_WORD;
-
-    if (ri) {
-        do {
-            const char* text = ri->GetUTF8Text(level);
-            if (text && *text != '\0') {
-                int left, top, right, bottom;
-                ri->BoundingBox(level, &left, &top, &right, &bottom);
-                
-                OcrResult res;
-                res.text = text;
-                res.left = left;
-                res.top = top;
-                res.width = right - left;
-                res.height = bottom - top;
-                results.push_back(res);
-            }
-            delete[] text;
-        } while (ri->Next(level));
-        delete ri;
-    }
-
-    // 释放资源
-    pixDestroy(&pix);
-    api.End();
-    return 0;
+    fields.push_back(current_field); // 最后一个字段
+    return fields;
 }
 
-double calculate_similarity(const std::string& s1, const std::string& s2) {
-    // 统一转为小写
-    std::string a = s1, b = s2;
-    std::transform(a.begin(), a.end(), a.begin(), ::tolower);
-    std::transform(b.begin(), b.end(), b.begin(), ::tolower);
+// 精准提取「确认文言表示,」之后、「Y,Y,Y」之前的文言内容
+std::string extract_target_text(const std::string& line) {
+    // 第一步：找到"确认文言表示,"的位置
+    std::string start_marker = "确认文言表示,";
+    size_t start_pos = line.find(start_marker);
+    if (start_pos == std::string::npos) {
+        return "";
+    }
+    start_pos += start_marker.length();
 
-    // 计算Levenshtein编辑距离
-    int m = a.size(), n = b.size();
-    std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1, 0));
+    // 第二步：找到"Y,Y,Y"的位置（结束标记）
+    std::string end_marker = "Y,Y,Y";
+    size_t end_pos = line.find(end_marker, start_pos);
+    if (end_pos == std::string::npos) {
+        return "";
+    }
 
-    for (int i = 0; i <= m; i++) dp[i][0] = i;
-    for (int j = 0; j <= n; j++) dp[0][j] = j;
+    // 提取中间内容并去除首尾空格/换行
+    std::string target_text = line.substr(start_pos, end_pos - start_pos);
+    // 去除首尾空白字符
+    target_text.erase(0, target_text.find_first_not_of(" \t\n\r"));
+    target_text.erase(target_text.find_last_not_of(" \t\n\r") + 1);
 
-    for (int i = 1; i <= m; i++) {
-        for (int j = 1; j <= n; j++) {
-            int cost = (a[i-1] == b[j-1]) ? 0 : 1;
-            dp[i][j] = std::min({dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + cost});
+    return target_text;
+}
+
+// 从CSV行提取元信息（核心：精准文言提取）
+CsvMeta extract_csv_meta(const std::vector<std::string>& fields, const std::string& original_line, int line_num) {
+    CsvMeta meta;
+    meta.line_num = line_num;
+    meta.seq_id = fields[0];          // 第1列：序号（24438）
+    
+    if (fields.size() >= 3) meta.module = fields[2];          // 第3列：模块
+    if (fields.size() >= 4) meta.desc = fields[3];            // 第4列：描述
+    
+    // 核心：提取目标文言内容
+    meta.lang_text = extract_target_text(original_line);
+    if (meta.lang_text.empty()) {
+        std::cerr << "CSV第" << line_num << "行：未提取到目标文言内容，跳过！" << std::endl;
+        return meta;
+    }
+
+    // 解析第5列的元信息（String ID/ScreenID/PartID）
+    if (fields.size() >= 5 && !fields[4].empty()) {
+        std::string meta_str = fields[4];
+        // 提取ScreenID
+        std::regex screen_regex(R"(ScreenID：(.+)\n)");
+        std::smatch screen_match;
+        if (std::regex_search(meta_str, screen_match, screen_regex)) {
+            meta.screen_id = screen_match.str(1);
+        }
+
+        // 提取PartID
+        std::regex part_regex(R"(PartID:(.+)\n)");
+        std::smatch part_match;
+        if (std::regex_search(meta_str, part_match, part_regex)) {
+            meta.part_id = part_match.str(1);
+        }
+
+        // 提取String ID
+        std::regex string_regex(R"(String ID:(.+))");
+        std::smatch string_match;
+        if (std::regex_search(meta_str, string_match, string_regex)) {
+            meta.string_id = string_match.str(1);
         }
     }
 
-    // 计算相似度（1 - 编辑距离/最长字符串长度）
-    int max_len = std::max(m, n);
-    if (max_len == 0) return 1.0;
-    return 1.0 - (double)dp[m][n] / max_len;
+    // 自动识别语种（基于提取的文言内容）
+    std::string lower_text = meta.lang_text;
+    std::transform(lower_text.begin(), lower_text.end(), lower_text.begin(), ::tolower);
+    
+    if (lower_text.find("english") != std::string::npos || lower_text.find("uk") != std::string::npos || lower_text.find("englist") != std::string::npos) {
+        meta.lang = "英语";
+    } else if (lower_text.find("français") != std::string::npos || lower_text.find("french") != std::string::npos) {
+        meta.lang = "法语";
+    } else if (lower_text.find("deutsch") != std::string::npos || lower_text.find("german") != std::string::npos) {
+        meta.lang = "德语";
+    } else if (lower_text.find("русский") != std::string::npos || lower_text.find("russian") != std::string::npos) {
+        meta.lang = "俄语";
+    } else if (lower_text.find("español") != std::string::npos || lower_text.find("spanish") != std::string::npos) {
+        meta.lang = "西班牙语";
+    } else if (lower_text.find("português") != std::string::npos || lower_text.find("portuguese") != std::string::npos) {
+        meta.lang = "葡萄牙语";
+    } else if (lower_text.find("italiano") != std::string::npos || lower_text.find("italian") != std::string::npos) {
+        meta.lang = "意大利语";
+    } else if (lower_text.find("türkçe") != std::string::npos || lower_text.find("turkish") != std::string::npos) {
+        meta.lang = "土耳其语";
+    } else if (lower_text.find("ไทย") != std::string::npos || lower_text.find("thai") != std::string::npos) {
+        meta.lang = "泰语";
+    } else if (lower_text.find("العربية") != std::string::npos || lower_text.find("arabic") != std::string::npos) {
+        meta.lang = "阿拉伯语";
+    } else {
+        meta.lang = "英语"; // 默认英语
+    }
+
+    return meta;
 }
 
-int annotate_image(const std::string& input_img, const std::string& output_img, const std::vector<TextStats>& stats) {
-    try {
-        CImg<unsigned char> img(input_img.c_str());
-        // 定义颜色：绿色（匹配成功）、红色（匹配失败）
-        const unsigned char green[] = {0, 255, 0};
-        const unsigned char red[] = {255, 0, 0};
-        const int line_width = 2;
+// 解析CSV文件（核心：适配非标格式+精准文言提取）
+std::map<std::string, std::vector<CsvMeta>> parse_csv(const std::string& csv_path) {
+    std::map<std::string, std::vector<CsvMeta>> csv_data; // 语种->元数据列表
 
-        // 遍历所有文言统计信息，绘制标注框
-        for (const auto& stat : stats) {
-            for (const auto& anno : stat.annotations) {
-                if (anno.left < 0 || anno.top < 0) continue;
-                // 绘制标注框
-                img.draw_rectangle(anno.left, anno.top, 
-                                  anno.left + anno.width, anno.top + anno.height,
-                                  anno.is_ok ? green : red, line_width);
-                
-                // 绘制勾选/叉号
-                int center_x = anno.left + anno.width / 2;
-                int center_y = anno.top + anno.height / 2;
-                int mark_size = std::min(anno.width, anno.height) / 4;
+    // 检查文件存在性
+    if (access(csv_path.c_str(), F_OK) != 0) {
+        throw std::runtime_error("CSV文件不存在：" + csv_path);
+    }
 
-                if (anno.is_ok) {
-                    // 勾选符号
-                    img.draw_line(center_x - mark_size, center_y, 
-                                 center_x, center_y + mark_size, green, line_width + 1);
-                    img.draw_line(center_x, center_y + mark_size, 
-                                 center_x + mark_size, center_y - mark_size, green, line_width + 1);
-                } else {
-                    // 叉号
-                    img.draw_line(center_x - mark_size, center_y - mark_size, 
-                                 center_x + mark_size, center_y + mark_size, red, line_width + 1);
-                    img.draw_line(center_x + mark_size, center_y - mark_size, 
-                                 center_x - mark_size, center_y + mark_size, red, line_width + 1);
-                }
-            }
+    // 以UTF-8编码打开CSV
+    std::ifstream csv_file(csv_path, std::ios::in | std::ios::binary);
+    if (!csv_file) {
+        throw std::runtime_error("无法打开CSV文件：" + csv_path);
+    }
+
+    std::string line;
+    int line_num = 0;
+    while (std::getline(csv_file, line)) {
+        line_num++;
+        if (line.empty()) continue;
+
+        // 保存原始行（用于精准提取文言）
+        std::string original_line = line;
+
+        // 解析CSV行（处理嵌套换行）
+        std::vector<std::string> fields = parse_csv_line(line);
+        if (fields.size() < 8) { // 至少8列有效数据
+            std::cerr << "CSV第" << line_num << "行格式错误（字段数不足），跳过！" << std::endl;
+            continue;
         }
 
-        // 保存标注后的图片
-        img.save(output_img.c_str());
-        return 0;
-    } catch (const std::exception& e) {
-        std::cerr << "图片标注失败：" << e.what() << std::endl;
-        return -1;
+        // 提取元数据（传入原始行用于精准文言提取）
+        CsvMeta meta = extract_csv_meta(fields, original_line, line_num);
+        if (meta.lang.empty() || meta.string_id.empty() || meta.lang_text.empty()) {
+            continue;
+        }
+
+        // 按语种分组
+        csv_data[meta.lang].push_back(meta);
     }
+
+    csv_file.close();
+    return csv_data;
+}
+
+// 匹配图片（按String ID，支持扩展后缀）
+std::string match_image_by_string_id(const std::string& img_dir, const std::string& string_id) {
+    // 遍历图片目录，匹配以String ID开头的png文件
+    std::string cmd = "find " + img_dir + " -name '" + string_id + "*' -name '*.png' | head -1";
+    FILE* pipe = popen(cmd.c_str(), "r");
+    if (!pipe) return "";
+
+    char buffer[256];
+    std::string img_path;
+    if (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
+        img_path = buffer;
+        // 去除换行符
+        img_path.erase(std::remove(img_path.begin(), img_path.end(), '\n'), img_path.end());
+    }
+    pclose(pipe);
+    return img_path;
+}
+
+// 按语种拆分任务（关联图片+CSV元数据）
+std::vector<LangTask> split_tasks_by_lang(
+    const std::map<std::string, std::vector<CsvMeta>>& csv_data,
+    const std::string& img_dir,
+    double confidence,
+    const std::string& output_dir
+) {
+    std::vector<LangTask> tasks;
+
+    for (const auto& [lang, meta_list] : csv_data) {
+        LangTask task;
+        task.lang = lang;
+        // 映射语种编码
+        auto lang_it = LANG_CODE_MAP.find(lang);
+        task.lang_code = (lang_it != LANG_CODE_MAP.end()) ? lang_it->second : "eng";
+        task.confidence_threshold = confidence;
+        task.output_dir = output_dir + "/" + lang; // 按语种分目录
+
+        // 匹配图片并关联元数据
+        for (const auto& meta : meta_list) {
+            if (meta.string_id.empty()) continue;
+            // 按String ID匹配图片
+            std::string img_path = match_image_by_string_id(img_dir, meta.string_id);
+            if (img_path.empty()) {
+                std::cerr << "未找到String ID[" << meta.string_id << "]对应的图片，跳过！" << std::endl;
+                continue;
+            }
+            // 保存图片路径+元数据
+            task.img_meta_list.emplace_back(img_path, meta);
+        }
+
+        if (!task.img_meta_list.empty()) {
+            tasks.push_back(task);
+        }
+    }
+
+    return tasks;
 }

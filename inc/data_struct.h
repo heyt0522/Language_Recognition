@@ -4,61 +4,72 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <mutex>
 
-// OCR识别结果
+// 语种编码映射（Tesseract标准编码）
+const std::map<std::string, std::string> LANG_CODE_MAP = {
+    {"英语", "eng"},
+    {"法语", "fra"},
+    {"意大利语", "ita"},
+    {"土耳其语", "tur"},
+    {"西班牙语", "spa"},
+    {"葡萄牙语", "por"},
+    {"泰语", "tha"},
+    {"阿拉伯语", "ara"},
+    {"俄语", "rus"},
+    {"德语", "deu"}
+};
+
+// CSV解析后的元数据结构体
+struct CsvMeta {
+    int line_num;               // CSV行号
+    std::string seq_id;         // 序号（如24438）
+    std::string module;         // 模块（如MultiLanguageTable（Operation））
+    std::string desc;           // 描述（如车机已启动）
+    std::string lang_text;      // 目标文言（精准提取的内容）
+    std::string string_id;      // 核心标识（如MM_00_06_04）
+    std::string screen_id;      // 屏幕ID（如MM_00_06_04）
+    std::string part_id;        // 部件ID（如1_1_1_A_1）
+    std::string lang;           // 语种（自动识别，如英语）
+};
+
+// 单条OCR识别结果
 struct OcrResult {
-    std::string text;   // 识别文字
-    int left;           // 左上角X
-    int top;            // 左上角Y
-    int width;          // 宽度
-    int height;         // 高度
+    // 基础字段
+    std::string lang;          // 语种（中文名称，如：英语）
+    std::string lang_code;     // 语种编码（如：eng）
+    std::string img_id;        // 图片ID（完整文件名，如MM_02_01_01_04）
+    std::string text;          // 识别文本
+    bool is_ok;                // 识别是否成功
+    int count;                 // 该文本出现次数
+    std::string annotated_img; // 标注后图片路径
+    std::vector<int> box;      // 识别点位框 [x, y, w, h]
+    
+    // CSV元数据字段
+    std::string seq_id;         // CSV序号（24438）
+    std::string string_id;      // String ID（MM_00_06_04）
+    std::string screen_id;      // ScreenID
+    std::string part_id;        // PartID
+    std::string doc_position;   // 文档位置（CSV行号+模块）
 };
 
-// 标注信息
-struct Annotation {
-    int left;          // X坐标
-    int top;           // Y坐标
-    int width;         // 宽度
-    int height;        // 高度
-    bool is_ok;        // 匹配是否成功
-};
-
-// 单条文言统计
-struct TextStats {
-    std::string lang;          // 语种（如Italiano/English）
-    std::string image_id;      // 图片ID
-    std::string content;       // 文言内容
-    std::vector<int> doc_lines;// 文档中出现行号
-    int total_occurrences;     // 总出现次数
-    int match_count;           // 匹配成功次数
-    std::vector<Annotation> annotations; // 标注列表
-};
-
-// 按语种分组的任务
+// 多语种任务结构体（线程池用）- 完全移除mutex
 struct LangTask {
-    std::string lang;                          // 语种
-    std::map<std::string, TextStats> text_db;  // 该语种的文言库
-    std::vector<std::string> image_paths;      // 待处理图片路径
-    double threshold;                          // 匹配阈值
-    std::map<std::string, std::vector<TextStats>> result; // 该语种处理结果
-    // std::mutex mutex;                          // 线程安全锁
-    std::string udisk_mount;                   // U盘挂载点
-    std::string output_dir = "/home/he_yt/Multilingual_Recognition/code/language_result";    //新增本地存储点
+    std::string lang;                      // 语种（中文名称）
+    std::string lang_code;                 // 语种编码（Tesseract用）
+    std::vector<std::pair<std::string, CsvMeta>> img_meta_list; // 图片路径+CSV元数据
+    double confidence_threshold;           // 识别置信度阈值
+    std::string output_dir;                // 本地输出目录（替代U盘）
+
+    // 显式声明默认构造/拷贝/移动（确保编译器生成）
+    LangTask() = default;
+    LangTask(const LangTask&) = default;
+    LangTask(LangTask&&) = default;
+    LangTask& operator=(const LangTask&) = default;
+    LangTask& operator=(LangTask&&) = default;
+    ~LangTask() = default;
 };
 
-// 命令行参数
-struct CmdArgs {
-    std::string csv_path;       // CSV文件路径
-    std::string image_dir;      // 图片目录
-    double threshold;           // 匹配阈值（默认0.7）
-    std::string udisk_mount;    // U盘挂载点
-};
-
-// 全局结果集
-struct ResultSet {
-    std::map<std::string, std::vector<TextStats>> all_results; // 按图片ID分组
-    std::mutex mutex;                                          // 全局结果锁
-};
+// 全局统计：文本出现次数
+extern std::map<std::string, int> g_text_count_map;
 
 #endif // DATA_STRUCT_H

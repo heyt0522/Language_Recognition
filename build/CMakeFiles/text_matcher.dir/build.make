@@ -125,10 +125,24 @@ CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/ocr_processor.cpp -o CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.s
 
+CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: CMakeFiles/text_matcher.dir/flags.make
+CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: ../src/udisk_handler.cpp
+CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o -MF CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o.d -o CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp
+
+CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp > CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i
+
+CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp -o CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s
+
 CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: CMakeFiles/text_matcher.dir/flags.make
 CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: ../src/pdf_generator.cpp
 CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o -MF CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o.d -o CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp
 
 CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s: cmake_force
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o: CMakeFiles/text_matcher.dir/flags.make
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o: ../src/thread_pool.cpp
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o -MF CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o.d -o CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/thread_pool.cpp
 
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.i: cmake_force
@@ -153,29 +167,15 @@ CMakeFiles/text_matcher.dir/src/thread_pool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/thread_pool.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/thread_pool.cpp -o CMakeFiles/text_matcher.dir/src/thread_pool.cpp.s
 
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: CMakeFiles/text_matcher.dir/flags.make
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: ../src/udisk_handler.cpp
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o -MF CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o.d -o CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp
-
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp > CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i
-
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp -o CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s
-
 # Object files for target text_matcher
 text_matcher_OBJECTS = \
 "CMakeFiles/text_matcher.dir/src/Language_main.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o" \
+"CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o" \
-"CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o" \
-"CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o"
+"CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
 
 # External object files for target text_matcher
 text_matcher_EXTERNAL_OBJECTS =
@@ -184,13 +184,11 @@ text_matcher: CMakeFiles/text_matcher.dir/src/Language_main.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o
+text_matcher: CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o
-text_matcher: CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/build.make
 text_matcher: /usr/lib/x86_64-linux-gnu/libhpdf.so
-text_matcher: /usr/lib/x86_64-linux-gnu/libX11.so
-text_matcher: /usr/lib/x86_64-linux-gnu/libXext.so
 text_matcher: CMakeFiles/text_matcher.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable text_matcher"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/text_matcher.dir/link.txt --verbose=$(VERBOSE)

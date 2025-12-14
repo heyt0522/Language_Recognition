@@ -1,137 +1,108 @@
 #include "thread_pool.h"
-#include "ocr_processor.h"
-#include "csv_parser.h"
 #include <iostream>
-#include <cstdlib>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <cstring>
+#include <algorithm>
+#include <thread>
+#include "ocr_processor.h"
+#include "data_struct.h"
 
-void* lang_process_worker(void* arg) {
-    LangTask* task = static_cast<LangTask*>(arg);
-    std::cout << "线程启动：处理语种 [" << task->lang << "]，待处理图片数：" << task->image_paths.size() << std::endl;
+// 线程池全局变量
+static pthread_t* g_threads = nullptr;
+static int g_thread_num = 0;
+static std::vector<LangTask> g_tasks;
+static std::vector<OcrResult> g_all_results;
+static std::mutex g_task_mutex;
+static std::mutex g_result_mutex;
+static bool g_stop = false;
 
-    // 遍历该语种的所有待处理图片
-    for (const auto& img_path : task->image_paths) {
-        // 1. 执行OCR识别（指定当前语种）
-        std::vector<OcrResult> ocr_results;
-        if (ocr_image_by_lang(img_path, task->lang, ocr_results) != 0) {
-            std::cerr << "OCR识别失败：" << img_path << "（语种：" << task->lang << "）" << std::endl;
+// 线程工作函数
+void* worker_thread(void* arg) {
+    int thread_id = *(int*)arg;
+    delete (int*)arg;
+
+    while (!g_stop) {
+        LangTask task;
+        bool has_task = false;
+
+        {
+            std::lock_guard<std::mutex> lock(g_task_mutex);
+            if (!g_tasks.empty()) {
+                task = g_tasks.back();
+                g_tasks.pop_back();
+                has_task = true;
+            }
+        }
+
+        if (!has_task) {
+            usleep(10000);
             continue;
         }
 
-        // 2. 文字匹配并生成统计信息
-        std::vector<TextStats> img_stats;
-        std::string img_id = extract_image_id_from_path(img_path);
-
-        for (auto& [content, stats] : task->text_db) {
-            TextStats img_stat = stats;
-            img_stat.annotations.clear();
-            img_stat.match_count = 0;
-
-            // 遍历OCR结果，匹配当前文言
-            for (const auto& ocr : ocr_results) {
-                double sim = calculate_similarity(content, ocr.text);
-                if (sim >= task->threshold) {
-                    Annotation anno{ocr.left, ocr.top, ocr.width, ocr.height, true};
-                    img_stat.annotations.push_back(anno);
-                    img_stat.match_count++;
-                }
-            }
-
-            // 如果无匹配，添加空标注（标记为失败）
-            if (img_stat.annotations.empty()) {
-                Annotation anno{-1, -1, 0, 0, false};
-                img_stat.annotations.push_back(anno);
-            }
-
-            img_stats.push_back(img_stat);
-        }
-
-        // 3. 生成标注图片（保存到U盘）
-        std::string img_name = img_path.substr(img_path.find_last_of('/') + 1);
-        // U盘挂载点
-        /*std::string annotated_img = task->udisk_mount + "/annotated_" + img_name; */
-        
-        //本地目录保存
-        std::string annotated_img = task->output_dir + "/annotated_" + img_name;
-        mkdir(task->output_dir.c_str(), 0777);  // 755 权限：所有者可读写执行，其他只读执行
-        if (annotate_image(img_path, annotated_img, img_stats) != 0) {
-            std::cerr << "图片标注失败：" << img_path << std::endl;
-        }
-
-        // 4. 保存结果到当前语种任务的结果集
-        // std::lock_guard<std::mutex> lock(task->mutex);
-        task->result[img_id] = img_stats;
-    }
-
-    std::cout << "线程完成：语种 [" << task->lang << "]" << std::endl;
-    return nullptr;
-}
-
-std::vector<LangTask> split_tasks_by_lang(const std::map<std::string, TextStats>& text_db,
-                                         const std::vector<std::string>& image_paths,
-                                         double threshold) {
-    std::map<std::string, LangTask> lang_task_map;
-
-    // 按语种分组文言库
-    for (const auto& [content, stats] : text_db) {
-        std::string lang = stats.lang;
-        if (lang_task_map.find(lang) == lang_task_map.end()) {
-            LangTask task;
-            task.lang = lang;
-            task.threshold = threshold;
-            task.image_paths = image_paths;
-            lang_task_map[lang] = task;
-        }
-        lang_task_map[lang].text_db[content] = stats;
-    }
-
-    // 转换为vector返回
-    std::vector<LangTask> tasks;
-    for (auto& [lang, task] : lang_task_map) {
-        tasks.push_back(std::move(task));
-    }
-
-    std::cout << "按语种拆分任务完成，共生成 " << tasks.size() << " 个语种任务" << std::endl;
-    return tasks;
-}
-
-int run_multi_thread_tasks(std::vector<LangTask>& tasks, ResultSet& global_result) {
-    if (tasks.empty()) {
-        std::cerr << "无语种任务可处理" << std::endl;
-        return -1;
-    }
-
-    // 创建线程数组
-    std::vector<pthread_t> threads(tasks.size());
-
-    // 启动每个语种的处理线程
-    for (size_t i = 0; i < tasks.size(); i++) {
-        if (pthread_create(&threads[i], nullptr, lang_process_worker, &tasks[i]) != 0) {
-            std::cerr << "创建线程失败：语种 [" << tasks[i].lang << "]" << std::endl;
-            // 销毁已创建的线程
-            for (size_t j = 0; j < i; j++) {
-                pthread_cancel(threads[j]);
-                pthread_join(threads[j], nullptr);
-            }
-            return -1;
-        }
-        std::cout << "创建线程：语种 [" << tasks[i].lang << "]，线程ID：" << threads[i] << std::endl;
-    }
-
-    // 等待所有线程完成，并合并结果到全局结果集
-    for (size_t i = 0; i < tasks.size(); i++) {
-        pthread_join(threads[i], nullptr);
-
-        // 合并结果
-        std::lock_guard<std::mutex> lock(global_result.mutex);
-        for (auto& [img_id, stats] : tasks[i].result) {
-            global_result.all_results[img_id].insert(
-                global_result.all_results[img_id].end(),
-                stats.begin(), stats.end()
+        std::cout << "线程" << thread_id << "开始处理语种：" << task.lang << "（编码：" << task.lang_code << "）" << std::endl;
+        for (const auto& [img_path, csv_meta] : task.img_meta_list) {
+            OcrResult res = process_image(
+                img_path, 
+                csv_meta, 
+                task.confidence_threshold
             );
+            
+            {
+                std::lock_guard<std::mutex> lock(g_result_mutex);
+                g_all_results.push_back(res);
+            }
+        }
+        std::cout << "线程" << thread_id << "完成语种：" << task.lang << "的处理！共处理" << task.img_meta_list.size() << "张图片" << std::endl;
+    }
+
+    pthread_exit(nullptr);
+}
+
+// 初始化线程池
+bool init_thread_pool(int thread_num) {
+    if (thread_num <= 0) thread_num = std::min(10, (int)std::thread::hardware_concurrency());
+    g_thread_num = thread_num;
+    g_threads = new pthread_t[thread_num];
+
+    for (int i = 0; i < thread_num; i++) {
+        int* id = new int(i);
+        if (pthread_create(&g_threads[i], nullptr, worker_thread, id) != 0) {
+            std::cerr << "线程" << i << "创建失败！" << std::endl;
+            return false;
         }
     }
 
-    return 0;
+    g_stop = false;
+    return true;
+}
+
+// 提交任务（恢复const引用）
+void submit_tasks(const std::vector<LangTask>& tasks) {
+    std::lock_guard<std::mutex> lock(g_task_mutex);
+    g_tasks = tasks;
+}
+
+// 获取所有识别结果
+std::vector<OcrResult> get_all_results() {
+    while (true) {
+        std::lock_guard<std::mutex> lock(g_task_mutex);
+        if (g_tasks.empty()) break;
+        usleep(100000);
+    }
+
+    g_stop = true;
+    for (int i = 0; i < g_thread_num; i++) {
+        pthread_join(g_threads[i], nullptr);
+    }
+
+    return g_all_results;
+}
+
+// 销毁线程池
+void destroy_thread_pool() {
+    if (g_threads) {
+        delete[] g_threads;
+        g_threads = nullptr;
+    }
+    g_thread_num = 0;
+    g_all_results.clear();
 }

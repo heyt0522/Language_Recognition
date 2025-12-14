@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc -I/usr/include/leptonica
 
-CXX_FLAGS =  -Wall -O2 -g -O0 -std=gnu++17
+CXX_FLAGS =  -Wall -O2 -g -std=gnu++17
 

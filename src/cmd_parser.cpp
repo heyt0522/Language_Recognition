@@ -1,50 +1,40 @@
 #include "cmd_parser.h"
-#include <getopt.h>
 #include <iostream>
-#include <cstring>
+#include <unistd.h>
 
-int parse_cmd_args(int argc, char* argv[], CmdArgs& args) {
-    // 默认参数初始化
-    args.csv_path = "";
-    args.image_dir = "";
-    std::string output_dir = "/home/he_yt/Multilingual_Recognition/code/language_result/pdf/";
-    args.threshold = 0.7;
-
-    // 短选项定义
-    const char* optstring = "c:i:u:t:";
+CmdParams parse_cmd_args(int argc, char** argv) {
+    CmdParams params;
     int opt;
-    while ((opt = getopt(argc, argv, optstring)) != -1) {
+
+    while ((opt = getopt(argc, argv, "c:i:o:t:")) != -1) {
         switch (opt) {
             case 'c':
-                args.csv_path = optarg;
+                params.csv_path = optarg;
                 break;
             case 'i':
-                args.image_dir = optarg;
+                params.img_dir = optarg;
                 break;
-            case 'u':
-                output_dir = optarg;
+            case 'o':
+                params.pdf_output = optarg;
                 break;
             case 't':
-                args.threshold = atof(optarg);
-                if (args.threshold < 0.0 || args.threshold > 1.0) {
-                    std::cerr << "阈值必须在0.0~1.0之间！" << std::endl;
-                    return -1;
-                }
+                params.confidence = atof(optarg);
                 break;
-            case '?':
-                std::cerr << "未知选项：" << (char)optopt << std::endl;
-                return -1;
             default:
-                return -1;
+                params.is_valid = false;
+                return params;
         }
     }
 
-    // 检查必填参数
-    if (args.csv_path.empty() || args.image_dir.empty()) {
-        std::cerr << "缺少必填参数！" << std::endl;
-        std::cerr << "用法：" << argv[0] << " -c <CSV路径> -i <图片目录> [-u <本地输出目录>] [-t <匹配阈值>]" << std::endl;
-        return -1;
-    }
+    // 校验必填参数
+    params.is_valid = !(params.csv_path.empty() || params.img_dir.empty() || params.pdf_output.empty());
+    return params;
+}
 
-    return 0;
+void print_usage() {
+    std::cout << "用法：./text_matcher -c <CSV路径> -i <图片目录> -o <PDF输出路径> [-t <置信度>]" << std::endl;
+    std::cout << "  -c: 文言库CSV文件路径（必填，格式：序号,,模块,描述,元信息,确认文言表示,目标文言,Y,Y,Y）" << std::endl;
+    std::cout << "  -i: 待识别图片目录（必填，图片命名：StringID+扩展.png）" << std::endl;
+    std::cout << "  -o: PDF输出路径（必填，如：./output/result.pdf）" << std::endl;
+    std::cout << "  -t: 识别置信度阈值（可选，默认0.8）" << std::endl;
 }
