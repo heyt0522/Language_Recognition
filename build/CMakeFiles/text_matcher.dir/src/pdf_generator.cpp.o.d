@@ -1,8 +1,8 @@
-CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
- /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/csv_parser.cpp \
+CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: \
+ /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp \
  /usr/include/stdc-predef.h \
- /home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc/csv_parser.h \
- /usr/include/c++/9/string \
+ /home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc/pdf_generator.h \
+ /usr/include/c++/9/vector /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -13,9 +13,6 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
- /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/memoryfwd.h \
- /usr/include/c++/9/bits/char_traits.h \
- /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/c++/9/bits/functexcept.h \
  /usr/include/c++/9/bits/exception_defines.h \
  /usr/include/c++/9/bits/cpp_type_traits.h \
@@ -29,12 +26,32 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/c++/9/bits/stl_iterator.h \
  /usr/include/c++/9/bits/ptr_traits.h /usr/include/c++/9/debug/debug.h \
  /usr/include/c++/9/bits/predefined_ops.h \
- /usr/include/c++/9/bits/postypes.h /usr/include/c++/9/cwchar \
- /usr/include/wchar.h \
+ /usr/include/c++/9/bits/allocator.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h \
+ /usr/include/c++/9/ext/new_allocator.h /usr/include/c++/9/new \
+ /usr/include/c++/9/exception /usr/include/c++/9/bits/exception.h \
+ /usr/include/c++/9/bits/exception_ptr.h \
+ /usr/include/c++/9/bits/cxxabi_init_exception.h \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h \
+ /usr/include/c++/9/typeinfo /usr/include/c++/9/bits/hash_bytes.h \
+ /usr/include/c++/9/bits/nested_exception.h \
+ /usr/include/c++/9/bits/memoryfwd.h \
+ /usr/include/c++/9/bits/stl_construct.h \
+ /usr/include/c++/9/ext/alloc_traits.h \
+ /usr/include/c++/9/bits/alloc_traits.h \
+ /usr/include/c++/9/bits/stl_uninitialized.h \
+ /usr/include/c++/9/bits/stl_vector.h /usr/include/c++/9/initializer_list \
+ /usr/include/c++/9/bits/stl_bvector.h \
+ /usr/include/c++/9/bits/functional_hash.h \
+ /usr/include/c++/9/bits/range_access.h \
+ /usr/include/c++/9/bits/vector.tcc \
+ /home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc/data_struct.h \
+ /usr/include/c++/9/string /usr/include/c++/9/bits/stringfwd.h \
+ /usr/include/c++/9/bits/char_traits.h /usr/include/c++/9/bits/postypes.h \
+ /usr/include/c++/9/cwchar /usr/include/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
@@ -51,14 +68,6 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/c++/9/bits/allocator.h \
- /usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h \
- /usr/include/c++/9/ext/new_allocator.h /usr/include/c++/9/new \
- /usr/include/c++/9/exception /usr/include/c++/9/bits/exception.h \
- /usr/include/c++/9/bits/exception_ptr.h \
- /usr/include/c++/9/bits/cxxabi_init_exception.h \
- /usr/include/c++/9/typeinfo /usr/include/c++/9/bits/hash_bytes.h \
- /usr/include/c++/9/bits/nested_exception.h \
  /usr/include/c++/9/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h \
  /usr/include/c++/9/clocale /usr/include/locale.h \
@@ -70,8 +79,6 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/c++/9/bits/cxxabi_forced.h \
  /usr/include/c++/9/bits/stl_function.h \
  /usr/include/c++/9/backward/binders.h \
- /usr/include/c++/9/bits/range_access.h \
- /usr/include/c++/9/initializer_list \
  /usr/include/c++/9/bits/basic_string.h \
  /usr/include/c++/9/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/gthr.h \
@@ -101,8 +108,6 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/atomic_word.h \
- /usr/include/c++/9/ext/alloc_traits.h \
- /usr/include/c++/9/bits/alloc_traits.h \
  /usr/include/c++/9/ext/string_conversions.h /usr/include/c++/9/cstdlib \
  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
@@ -123,34 +128,49 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
- /usr/include/c++/9/bits/functional_hash.h \
- /usr/include/c++/9/bits/basic_string.tcc /usr/include/c++/9/vector \
- /usr/include/c++/9/bits/stl_construct.h \
- /usr/include/c++/9/bits/stl_uninitialized.h \
- /usr/include/c++/9/bits/stl_vector.h \
- /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /usr/include/c++/9/map /usr/include/c++/9/bits/stl_tree.h \
+ /usr/include/c++/9/bits/basic_string.tcc /usr/include/c++/9/map \
+ /usr/include/c++/9/bits/stl_tree.h \
  /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/stl_map.h /usr/include/c++/9/tuple \
  /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
  /usr/include/c++/9/array /usr/include/c++/9/stdexcept \
  /usr/include/c++/9/bits/uses_allocator.h \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/stl_multimap.h \
- /usr/include/c++/9/bits/erase_if.h \
- /home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc/data_struct.h \
- /home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc/csv_utils.h \
- /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
- /usr/include/c++/9/bits/algorithmfwd.h \
- /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
+ /usr/include/c++/9/bits/erase_if.h /usr/include/hpdf.h \
+ /usr/include/hpdf_config.h /usr/include/hpdf_version.h \
+ /usr/include/hpdf_consts.h /usr/include/hpdf_doc.h \
+ /usr/include/hpdf_catalog.h /usr/include/hpdf_objects.h \
+ /usr/include/hpdf_encoder.h /usr/include/hpdf_streams.h \
+ /usr/include/hpdf_list.h /usr/include/hpdf_error.h \
+ /usr/include/hpdf_types.h /usr/include/c++/9/stdlib.h \
+ /usr/include/hpdf_mmgr.h /usr/include/hpdf_encrypt.h \
+ /usr/include/hpdf_image.h /usr/include/hpdf_pages.h \
+ /usr/include/hpdf_gstate.h /usr/include/hpdf_font.h \
+ /usr/include/hpdf_fontdef.h /usr/include/hpdf_ext_gstate.h \
+ /usr/include/hpdf_outline.h /usr/include/hpdf_pdfa.h \
+ /usr/include/x86_64-linux-gnu/sys/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+ /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
  /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/c++/9/fstream \
- /usr/include/c++/9/istream /usr/include/c++/9/ios \
+ /usr/include/linux/close_range.h /usr/include/c++/9/iostream \
+ /usr/include/c++/9/ostream /usr/include/c++/9/ios \
  /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
  /usr/include/c++/9/bits/locale_classes.tcc \
@@ -164,43 +184,11 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: \
  /usr/include/c++/9/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h \
  /usr/include/c++/9/bits/locale_facets.tcc \
- /usr/include/c++/9/bits/basic_ios.tcc /usr/include/c++/9/ostream \
- /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/bits/istream.tcc \
- /usr/include/c++/9/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
- /usr/include/c++/9/bits/fstream.tcc /usr/include/c++/9/sstream \
- /usr/include/c++/9/bits/sstream.tcc /usr/include/c++/9/regex \
- /usr/include/c++/9/bitset /usr/include/c++/9/iterator \
- /usr/include/c++/9/bits/stream_iterator.h /usr/include/c++/9/locale \
- /usr/include/c++/9/bits/locale_facets_nonio.h /usr/include/c++/9/ctime \
- /usr/include/x86_64-linux-gnu/c++/9/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/9/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/9/bits/locale_facets_nonio.tcc \
- /usr/include/c++/9/bits/locale_conv.h \
- /usr/include/c++/9/bits/unique_ptr.h /usr/include/c++/9/memory \
- /usr/include/c++/9/bits/stl_raw_storage_iter.h \
- /usr/include/c++/9/ext/concurrence.h \
- /usr/include/c++/9/bits/shared_ptr.h \
- /usr/include/c++/9/bits/shared_ptr_base.h \
- /usr/include/c++/9/bits/allocated_ptr.h \
- /usr/include/c++/9/bits/refwrap.h \
- /usr/include/c++/9/bits/shared_ptr_atomic.h \
- /usr/include/c++/9/bits/atomic_base.h \
- /usr/include/c++/9/bits/atomic_lockfree_defines.h \
- /usr/include/c++/9/backward/auto_ptr.h /usr/include/c++/9/stack \
- /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
- /usr/include/c++/9/bits/deque.tcc /usr/include/c++/9/bits/stl_stack.h \
- /usr/include/c++/9/cstring /usr/include/string.h /usr/include/strings.h \
- /usr/include/c++/9/bits/std_function.h \
- /usr/include/c++/9/bits/regex_constants.h \
- /usr/include/c++/9/bits/regex_error.h \
- /usr/include/c++/9/bits/regex_automaton.h \
- /usr/include/c++/9/bits/regex_automaton.tcc \
- /usr/include/c++/9/bits/regex_scanner.h \
- /usr/include/c++/9/bits/regex_scanner.tcc \
- /usr/include/c++/9/bits/regex_compiler.h \
- /usr/include/c++/9/bits/regex_compiler.tcc \
- /usr/include/c++/9/bits/regex.h /usr/include/c++/9/bits/regex.tcc \
- /usr/include/c++/9/bits/regex_executor.h \
- /usr/include/c++/9/bits/regex_executor.tcc /usr/include/c++/9/iostream
+ /usr/include/c++/9/bits/basic_ios.tcc \
+ /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
+ /usr/include/c++/9/bits/istream.tcc /usr/include/c++/9/algorithm \
+ /usr/include/c++/9/bits/stl_algo.h \
+ /usr/include/c++/9/bits/algorithmfwd.h \
+ /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
+ /home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc/data_struct.h

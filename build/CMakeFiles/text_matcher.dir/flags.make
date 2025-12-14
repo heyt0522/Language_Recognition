@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc -I/usr/include/leptonica
+CXX_INCLUDES = -I/home/he_yt/Multilingual_Recognition/code/Language_Recognition/inc -I/usr/include/leptonica -isystem /usr/include/opencv4
 
-CXX_FLAGS =  -Wall -O2 -g -std=gnu++17
+CXX_FLAGS = -std=gnu++11
 

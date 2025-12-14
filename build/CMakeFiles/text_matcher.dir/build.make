@@ -83,24 +83,10 @@ CMakeFiles/text_matcher.dir/src/Language_main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/Language_main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/Language_main.cpp -o CMakeFiles/text_matcher.dir/src/Language_main.cpp.s
 
-CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o: CMakeFiles/text_matcher.dir/flags.make
-CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o: ../src/cmd_parser.cpp
-CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o -MF CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o.d -o CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/cmd_parser.cpp
-
-CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/cmd_parser.cpp > CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.i
-
-CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/cmd_parser.cpp -o CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.s
-
 CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: CMakeFiles/text_matcher.dir/flags.make
 CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: ../src/csv_parser.cpp
 CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o -MF CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o.d -o CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/csv_parser.cpp
 
 CMakeFiles/text_matcher.dir/src/csv_parser.cpp.i: cmake_force
@@ -114,7 +100,7 @@ CMakeFiles/text_matcher.dir/src/csv_parser.cpp.s: cmake_force
 CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o: CMakeFiles/text_matcher.dir/flags.make
 CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o: ../src/ocr_processor.cpp
 CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o -MF CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o.d -o CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/ocr_processor.cpp
 
 CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.i: cmake_force
@@ -125,38 +111,10 @@ CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/ocr_processor.cpp -o CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.s
 
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: CMakeFiles/text_matcher.dir/flags.make
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: ../src/udisk_handler.cpp
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o -MF CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o.d -o CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp
-
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp > CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.i
-
-CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/udisk_handler.cpp -o CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.s
-
-CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: CMakeFiles/text_matcher.dir/flags.make
-CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: ../src/pdf_generator.cpp
-CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o -MF CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o.d -o CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp
-
-CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp > CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i
-
-CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp -o CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s
-
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o: CMakeFiles/text_matcher.dir/flags.make
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o: ../src/thread_pool.cpp
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o -MF CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o.d -o CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/thread_pool.cpp
 
 CMakeFiles/text_matcher.dir/src/thread_pool.cpp.i: cmake_force
@@ -167,30 +125,110 @@ CMakeFiles/text_matcher.dir/src/thread_pool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/thread_pool.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/thread_pool.cpp -o CMakeFiles/text_matcher.dir/src/thread_pool.cpp.s
 
+CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: CMakeFiles/text_matcher.dir/flags.make
+CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: ../src/pdf_generator.cpp
+CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o -MF CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o.d -o CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp
+
+CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp > CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.i
+
+CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/pdf_generator.cpp -o CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.s
+
+CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o: CMakeFiles/text_matcher.dir/flags.make
+CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o: ../src/cmd_parser.cpp
+CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o: CMakeFiles/text_matcher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o -MF CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o.d -o CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o -c /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/cmd_parser.cpp
+
+CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/cmd_parser.cpp > CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.i
+
+CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he_yt/Multilingual_Recognition/code/Language_Recognition/src/cmd_parser.cpp -o CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.s
+
 # Object files for target text_matcher
 text_matcher_OBJECTS = \
 "CMakeFiles/text_matcher.dir/src/Language_main.cpp.o" \
-"CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o" \
-"CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o" \
+"CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o" \
 "CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o" \
-"CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
+"CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o"
 
 # External object files for target text_matcher
 text_matcher_EXTERNAL_OBJECTS =
 
 text_matcher: CMakeFiles/text_matcher.dir/src/Language_main.cpp.o
-text_matcher: CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/csv_parser.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/ocr_processor.cpp.o
-text_matcher: CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o
-text_matcher: CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o
+text_matcher: CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o
+text_matcher: CMakeFiles/text_matcher.dir/src/cmd_parser.cpp.o
 text_matcher: CMakeFiles/text_matcher.dir/build.make
 text_matcher: /usr/lib/x86_64-linux-gnu/libhpdf.so
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_alphamat.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_barcode.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_dnn_objdetect.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_dnn_superres.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_face.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_hfs.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_img_hash.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_intensity_transform.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_mcc.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_quality.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_rapid.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_reg.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_shape.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_tracking.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_viz.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_wechat_qrcode.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_plot.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_text.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_video.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_dnn.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.5.4d
+text_matcher: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.5.4d
 text_matcher: CMakeFiles/text_matcher.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable text_matcher"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/he_yt/Multilingual_Recognition/code/Language_Recognition/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable text_matcher"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/text_matcher.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

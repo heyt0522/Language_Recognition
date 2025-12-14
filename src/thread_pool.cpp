@@ -3,6 +3,8 @@
 #include <cstring>
 #include <algorithm>
 #include <thread>
+#include <mutex>
+#include <unistd.h>
 #include "ocr_processor.h"
 #include "data_struct.h"
 

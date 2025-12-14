@@ -1,4 +1,5 @@
 #include "csv_parser.h"
+#include "csv_utils.h"  // 引入抽离的工具函数
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
@@ -7,53 +8,8 @@
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
-#include "data_struct.h"
 
-// 解析带嵌套换行的CSV字段（处理双引号包裹的多行内容）
-std::vector<std::string> parse_csv_line(const std::string& line) {
-    std::vector<std::string> fields;
-    std::string current_field;
-    bool in_quote = false;
-
-    for (char c : line) {
-        if (c == '"' && !in_quote) {
-            in_quote = true;
-            continue;
-        } else if (c == '"' && in_quote) {
-            in_quote = false;
-            continue;
-        }
-
-        if (c == ',' && !in_quote) {
-            fields.push_back(current_field);
-            current_field.clear();
-        } else {
-            current_field += c;
-        }
-    }
-    fields.push_back(current_field); // 最后一个字段
-    return fields;
-}
-
-// 精准提取「确认文言表示,」之后、「Y,Y,Y」之前的文言内容
-std::string extract_target_text(const std::string& line) {
-    std::string start_marker = "确认文言表示,";
-    size_t start_pos = line.find(start_marker);
-    if (start_pos == std::string::npos) return "";
-    start_pos += start_marker.length();
-
-    std::string end_marker = "Y,Y,Y";
-    size_t end_pos = line.find(end_marker, start_pos);
-    if (end_pos == std::string::npos) return "";
-
-    std::string target_text = line.substr(start_pos, end_pos - start_pos);
-    target_text.erase(0, target_text.find_first_not_of(" \t\n\r"));
-    target_text.erase(target_text.find_last_not_of(" \t\n\r") + 1);
-
-    return target_text;
-}
-
-// 从CSV行提取元信息
+// 仅保留非inline函数的实现
 CsvMeta extract_csv_meta(const std::vector<std::string>& fields, const std::string& original_line, int line_num) {
     CsvMeta meta;
     meta.line_num = line_num;
@@ -68,7 +24,6 @@ CsvMeta extract_csv_meta(const std::vector<std::string>& fields, const std::stri
         return meta;
     }
 
-    // 解析元信息
     if (fields.size() >= 5 && !fields[4].empty()) {
         std::string meta_str = fields[4];
         std::regex screen_regex(R"(ScreenID：(.+)\n)");
@@ -90,13 +45,12 @@ CsvMeta extract_csv_meta(const std::vector<std::string>& fields, const std::stri
         }
     }
 
-    // 自动识别语种
     std::string lower_text = meta.lang_text;
     std::transform(lower_text.begin(), lower_text.end(), lower_text.begin(), ::tolower);
     
-    if (lower_text.find("english") != std::string::npos || lower_text.find("uk") != std::string::npos || lower_text.find("englist") != std::string::npos) {
+    if (lower_text.find("Englist") != std::string::npos || lower_text.find("uk") != std::string::npos || lower_text.find("englist") != std::string::npos) {
         meta.lang = "英语";
-    } else if (lower_text.find("français") != std::string::npos || lower_text.find("french") != std::string::npos) {
+    } else if (lower_text.find("French") != std::string::npos || lower_text.find("french") != std::string::npos) {
         meta.lang = "法语";
     } else if (lower_text.find("deutsch") != std::string::npos || lower_text.find("german") != std::string::npos) {
         meta.lang = "德语";
@@ -121,7 +75,6 @@ CsvMeta extract_csv_meta(const std::vector<std::string>& fields, const std::stri
     return meta;
 }
 
-// 解析CSV文件
 std::map<std::string, std::vector<CsvMeta>> parse_csv(const std::string& csv_path) {
     std::map<std::string, std::vector<CsvMeta>> csv_data;
 
@@ -159,23 +112,6 @@ std::map<std::string, std::vector<CsvMeta>> parse_csv(const std::string& csv_pat
     return csv_data;
 }
 
-// 匹配图片（按String ID）
-std::string match_image_by_string_id(const std::string& img_dir, const std::string& string_id) {
-    std::string cmd = "find " + img_dir + " -name '" + string_id + "*' -name '*.png' | head -1";
-    FILE* pipe = popen(cmd.c_str(), "r");
-    if (!pipe) return "";
-
-    char buffer[256];
-    std::string img_path;
-    if (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
-        img_path = buffer;
-        img_path.erase(std::remove(img_path.begin(), img_path.end(), '\n'), img_path.end());
-    }
-    pclose(pipe);
-    return img_path;
-}
-
-// 按语种拆分任务
 std::vector<LangTask> split_tasks_by_lang(
     const std::map<std::string, std::vector<CsvMeta>>& csv_data,
     const std::string& img_dir,
@@ -203,7 +139,6 @@ std::vector<LangTask> split_tasks_by_lang(
         }
 
         if (!task.img_meta_list.empty()) {
-            // 恢复简单的push_back（无拷贝错误）
             tasks.push_back(task);
         }
     }

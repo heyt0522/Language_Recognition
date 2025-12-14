@@ -11,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/text_matcher.dir/src/pdf_generator.cpp.o.d"
   "CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o"
   "CMakeFiles/text_matcher.dir/src/thread_pool.cpp.o.d"
-  "CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o"
-  "CMakeFiles/text_matcher.dir/src/udisk_handler.cpp.o.d"
   "text_matcher"
   "text_matcher.pdb"
 )

@@ -1,12 +1,11 @@
 #include <iostream>
 #include "cmd_parser.h"
 #include "csv_parser.h"
-#include "ocr_processor.h"
+#include "ocr_processor.h"  // 引入OCR函数声明
 #include "pdf_generator.h"
 #include "thread_pool.h"
 #include "data_struct.h"
 
-// 全局统计：文本出现次数
 std::map<std::string, int> g_text_count_map;
 
 int main(int argc, char** argv) {
@@ -18,7 +17,7 @@ int main(int argc, char** argv) {
     }
 
     // 2. 初始化OCR引擎
-    if (!init_ocr_engine("./config/tessdata")) {
+    if (!init_ocr_engine("/home/he_yt/Multilingual_Recognition/code/Language_Recognition/config/tessdata")) {
         std::cerr << "OCR引擎初始化失败！" << std::endl;
         return -1;
     }
@@ -43,7 +42,6 @@ int main(int argc, char** argv) {
         std::cerr << "线程池初始化失败！" << std::endl;
         return -1;
     }
-    // 恢复普通提交（无move）
     submit_tasks(tasks);
 
     // 6. 获取识别结果并生成PDF
@@ -59,6 +57,5 @@ int main(int argc, char** argv) {
 
     std::cout << "多语种识别任务完成！" << std::endl;
     std::cout << "PDF路径：" << params.pdf_output << std::endl;
-    std::cout << "标注图片目录：./annotated_imgs/" << std::endl;
     return 0;
 }

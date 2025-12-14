@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include "data_struct.h"
 
 // 递归创建目录
@@ -40,6 +41,23 @@ HPDF_Font load_multilang_font(HPDF_Doc pdf) {
     return font;
 }
 
+// 适配新版libharu的图片加载函数（支持PNG）
+HPDF_Image load_image_to_pdf(HPDF_Doc pdf, const std::string& img_path) {
+    // 判断文件是否为PNG格式（仅支持PNG，适配项目需求）
+    std::string ext = img_path.substr(img_path.find_last_of(".") + 1);
+    std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+    
+    if (ext == "png") {
+        return HPDF_LoadPngImageFromFile(pdf, img_path.c_str());
+    } else if (ext == "jpg" || ext == "jpeg") {
+        return HPDF_LoadJpegImageFromFile(pdf, img_path.c_str());
+    }else {
+        std::cerr << "不支持的图片格式：" << ext << "，仅支持PNG/JPG" << std::endl;
+        return nullptr;
+    }
+    
+}
+
 // 生成PDF报告（适配多语种）
 bool generate_pdf(
     const std::string& pdf_path,
@@ -74,9 +92,9 @@ bool generate_pdf(
         HPDF_Page_SetSize(page, HPDF_PAGE_SIZE_A4, HPDF_PAGE_LANDSCAPE); // 横向A4（适配多列）
         HPDF_Page_SetFontAndSize(page, font, 10); // 缩小字体适配多列
 
-        // 1. 插入标注图片（适配png）
+        // 1. 插入标注图片（适配新版libharu）
         if (access(res.annotated_img.c_str(), F_OK) == 0) {
-            HPDF_Image img = HPDF_LoadImageFromFile(pdf, res.annotated_img.c_str());
+            HPDF_Image img = load_image_to_pdf(pdf, res.annotated_img); // 替换为适配函数
             if (img) {
                 float img_w = HPDF_Image_GetWidth(img);
                 float img_h = HPDF_Image_GetHeight(img);
